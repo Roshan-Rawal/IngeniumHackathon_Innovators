@@ -65,7 +65,7 @@ textarea{
 			
 		<h3 id="q">When Feeling low/sad what you used to do?</h3>
 		<textarea id="txtarea" rows="10" cols="60"></textarea><br>
-	<button style="" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+	<button style="" id="endtest" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
   End Test
 </button>
 
@@ -83,6 +83,7 @@ textarea{
 
 <script>
 	this.i=0;
+	this.answers = [];
 	$(document).ready(function(){
 		
 		$("#testcat").change(function(){
@@ -100,6 +101,9 @@ textarea{
 					var arr = ["You have been selected for a job at 2 places, one job requires you to work yourself and another requires to work with people in open space, Which one will you choose? and Why?","In a Conference room where would you like to sit? at center or at corner? and why? ","You are at party where there is karaoke and everyone is insisting it's your turn to sing, what do you do? ","You are sailing across the sea alone. You get stuck on desired island with no people and need to spend the night there, will it be fun or borring for you? and why?","how was your behaviour when you were child?","when you are at the  gym, how do you like to listen music?"];
 					if(i<=arr.length){
 					var ans = $("#txtarea").val();
+					
+					answers.push(ans);
+
 					var question = $("#q").html();
 					$("#txtarea").val("");
 					$("#txtarea").focus();
@@ -110,10 +114,29 @@ textarea{
 				}
 			
 			else{
-
+				//alert(answers[0]);
 				alert("Test is completed, Click on End Test Button.");
 			}
 		}
+			});
+
+			$("#endtest").click(function(){
+
+					
+				//JSON.stringify(answers);
+				$.ajax({
+				   type: "POST",
+				   contentType: "application/json; charset=utf-8",
+				   data: JSON.stringify({ans:answers}),
+				   url: "/getresult",
+				   success: function(data,status){
+				       alert("Result: " + data );
+				   },
+				   error:function(data){
+				   	alert(data);
+				   }
+				});
+				  
 			});
 	});
 	</script>
