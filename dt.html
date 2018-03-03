@@ -1,0 +1,96 @@
+<html>
+<head>
+<title>Mental health Analysis</title>
+<!-- Wide card with share menu button -->
+<style>
+.demo-card-wide.mdl-card {
+  width: 70%;
+  border-radius:18px 18px;
+  margin-top:2%;
+
+}
+footer{
+	background-color: #ed407f;
+	color:white;
+            width: 100%;
+            bottom: 0;
+            position: fixed;
+
+            z-index:99999;
+}
+#first{
+	min-height: 140px;
+	margin-bottom:50px;
+	z-index: -1;
+}
+textarea{
+	width:70%;
+	border-radius:18px 18px;
+	margin-bottom:5%;
+	font-size:180%;
+}
+.demo-card-wide > .mdl-card__title {
+  color: #fff;
+  height: auto;
+  background: url('../assets/demos/welcome_card.jpg') center / cover;
+}
+.demo-card-wide > .mdl-card__menu {
+  color: #fff;
+}
+
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+</head>
+<body>
+	<div style="background:#ed407f;color:white;width:100%;padding:0;margin:0">
+		<span style="margin-left:5%"><h3 style="margin-left:30px;">MoodTest</h3></span>
+		<select id="testcat" style="float: right;margin-top:-50px;margin-right:20px;">
+			<option value="dt">Depression Test</option>
+			<option value="pt">Personality Test</option>
+			<option value="at">Anger Test</option>
+			<option value="ant">Anxiety Test</option>
+			<option value="ocdt">OCD Test</option>
+		</select>
+	</div>
+	<center>
+
+	<div class="centerpart" style="width:1100px">
+			
+		<h3 id="q">Question?</h3>
+		<textarea id="txtarea" rows="10" cols="60"></textarea><br>
+	<button style="" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+  End Test
+</button>
+
+<button style="" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="nextbtn">
+   Next Question
+</button>
+	
+
+</div>
+</center>
+
+<footer><center>Copyright MoodTest, 2018.</center></footer>
+</body>
+</html>
+
+<script>
+	$(document).ready(function(){
+			$("#testcat").change(function(){
+			var val = $(this).val();
+			window.open(""+val+".html","_self");
+
+		});
+			$("#nextbtn").click(function(){
+				var ans = $("#txtarea").val();
+				var question = $("#q").html();
+				$("#nextbtn").after('<div id="first" class="demo-card-wide mdl-card mdl-shadow--2dp"><div class="mdl-card__title"><h2 class="mdl-card__title-text">Welcome</h2></div><div class="mdl-card__supporting-text" style="font-size:160%;">'+ans+'</div><div class="mdl-card__actions mdl-card--border"><a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"> '+question+'</a></div></div>');
+			});
+	});
+	</script>
